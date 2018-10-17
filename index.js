@@ -5,7 +5,8 @@ var connection = require('./config');
 var authenticateController=require('./controllers/authenticate-controller');
 var registerController=require('./controllers/register-controller');
 var session = require('client-sessions');
-
+var edprof =  require('./controllers/editprofile')
+var profile = require('./controllers/profile')
 
 app.use(bodyParser.urlencoded({extended:true}));
 app.use(bodyParser.json());
@@ -48,9 +49,21 @@ app.get('/home',function(req,res){
   {
     return res.redirect('/')
   }
-  res.render(__dirname+"/templates/"+"home.html");
+  res.render(__dirname+"/templates/"+"home.html",{username:req.session.user});
 })
+
+app.get('/profile',profile.profileload);
+
+app.get('/profile/edit',function(req,res){
+  if(!req.session.user)
+  {
+    return res.redirect('/')
+  }
+  res.render(__dirname+"/templates/"+"edit.html",{username:req.session.user,message:req.query.message});
+})
+
 
 app.post('/controllers/register-controller', registerController.register);
 app.post('/controllers/authenticate-controller', authenticateController.authenticate);
+app.post('/controllers/editprofile',edprof.edit)
 app.listen(8012);

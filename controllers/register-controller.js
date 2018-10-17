@@ -28,7 +28,7 @@ module.exports.register=function(req,res){
               return res.redirect('/register/?message=Database query error');
             }else{
               req.session.user = req.body.name
-              return res.redirect('/profile');
+              return res.redirect('/profile/edit');
             }
           });
         }
