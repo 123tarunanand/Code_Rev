@@ -3,7 +3,7 @@ CREATE DATABASE CODEREV;
 
 USE CODEREV;
 
-CREATE TABLE user(username varchar(20) UNIQUE NOT NULL PRIMARY KEY, password varchar(100) NOT NULL,dojoin date NOT NULL,);
+CREATE TABLE user(username varchar(20) UNIQUE NOT NULL PRIMARY KEY, password varchar(100) NOT NULL,dojoin date NOT NULL);
 
 CREATE TABLE user_profile(email_id varchar(20) ,fname varchar(20), lname varchar(20), reputation int(6) NOT NULL DEFAULT 0, description varchar(1000), posts int(4) NOT NULL DEFAULT 0, comments int(4) NOT NULL DEFAULT 0, username varchar(20) UNIQUE NOT NULL PRIMARY KEY, FOREIGN KEY (username) REFERENCES user(username) ON DELETE CASCADE);
 

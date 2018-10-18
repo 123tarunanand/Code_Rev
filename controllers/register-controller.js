@@ -5,11 +5,13 @@ var connection = require('./../config');
 
 module.exports.register=function(req,res){
   var encryptedString = cryptr.encrypt(req.body.password);
-  var now = new Date();
+  var dateTime = require('node-datetime');
+var dt = dateTime.create();
+var formatted = dt.format('Y-m-d H:M:S');
     var users=[[
       req.body.name,
       encryptedString,
-      now]
+      formatted]
     ]
     connection.query('SELECT * FROM user WHERE username = ?',[req.body.name], function (error, results, fields) {
       if (error) {
