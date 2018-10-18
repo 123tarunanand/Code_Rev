@@ -75,4 +75,4 @@ app.post('/controllers/register-controller', registerController.register);
 app.post('/controllers/authenticate-controller', authenticateController.authenticate);
 app.post('/controllers/editprofile',edprof.edit)
 app.post('/controllers/postnew',post.newpost)
-app.listen(8012);
+app.listen(8011);
