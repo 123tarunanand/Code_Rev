@@ -9,7 +9,7 @@ var edprof =  require('./controllers/editprofile')
 var profile = require('./controllers/profile')
 var post = require('./controllers/postnew')
 var postpage = require('./controllers/postid')
-
+var categ = require('./controllers/categories')
 
 app.use(bodyParser.urlencoded({extended:true}));
 app.use(bodyParser.json());
@@ -76,6 +76,8 @@ app.get('/posts/new',function(req,res){
 
 app.get('/posts/u/:user',postpage.userpage)
 app.get('/posts/p/:postid',postpage.postcreate);
+app.get('/c/:cname',categ.homepage);
+app.get('/search/',categ.search)
 
 app.post('/controllers/register-controller', registerController.register);
 app.post('/controllers/authenticate-controller', authenticateController.authenticate);

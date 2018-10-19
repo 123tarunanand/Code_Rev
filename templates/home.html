@@ -1,8 +1,13 @@
 <html>
 <body>
+<form method ="GET" action ='/search'>
+<input type="text" placeholder="Search for categories" name="search"><input type="submit" value="Search">
+</form>
+<br>
 <a href ='/posts/new'>New Post <a> <a href ='/profile'>Profile</a> <a href = '/posts/u/<%= username %>'> My Posts</a> <a href ='/logout'>Logout</a>
 <br>
 <br>
+
 Welcome <%= username%>
 </body>
 
