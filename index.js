@@ -8,6 +8,8 @@ var session = require('client-sessions');
 var edprof =  require('./controllers/editprofile')
 var profile = require('./controllers/profile')
 var post = require('./controllers/postnew')
+var postpage = require('./controllers/postid')
+
 
 app.use(bodyParser.urlencoded({extended:true}));
 app.use(bodyParser.json());
@@ -71,8 +73,15 @@ app.get('/posts/new',function(req,res){
   res.render(__dirname+"/templates/"+"newpost.html",{message:req.query.message});
 })
 
+
+app.get('/posts/u/:user',postpage.userpage)
+app.get('/posts/p/:postid',postpage.postcreate);
+
 app.post('/controllers/register-controller', registerController.register);
 app.post('/controllers/authenticate-controller', authenticateController.authenticate);
 app.post('/controllers/editprofile',edprof.edit)
 app.post('/controllers/postnew',post.newpost)
 app.listen(8011);
+app.use(function (req, res) {
+    res.render( __dirname + "/templates/" + "error.html")
+});

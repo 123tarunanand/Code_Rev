@@ -85,7 +85,7 @@ module.exports.newpost=function(req,res){
                 });
 
               });
-                return res.redirect('/home')
+                return res.redirect('/posts/p/'+postid)
               }
             }
           );
