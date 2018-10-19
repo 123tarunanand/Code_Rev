@@ -9,6 +9,10 @@ module.exports.postcreate = function(req,res){
       console.log(error)
     }
     else {
+      if(results.length ==0)
+      {
+        return res.render(__dirname+"./../templates/error.html");
+      }
       var data = {'title':results[0].title,
     'content':results[0].content,
   'username':results[0].username,
@@ -54,7 +58,7 @@ module.exports.userpage = function(req,res){
         {
            data.push({'title':results[obj].title,'id':results[obj].postid})
         }
-        res.render(__dirname+'./../templates/allposts.html',{data:data})
+        res.render(__dirname+'./../templates/allposts.html',{username:req.params.user,data:data})
       }
     }
   });

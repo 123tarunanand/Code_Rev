@@ -1,7 +1,18 @@
 <html>
-<body>
-{% for link in data %}
- {%  link %}
-{% endfor %}
-</body>
+<h1> Posts by <%= username %> </h1>
+<a id ="body">
+
+</a>
 </html>
+
+<script>
+var k = <%- JSON.stringify(data) %>;
+for (obj in k)
+{var a = document.createElement('a');
+var linkText = document.createTextNode(k[obj].title);
+a.appendChild(linkText);
+a.href = '/posts/p/'+k[obj].id;
+document.body.appendChild(a);
+document.write("<br>");
+}
+</script>
