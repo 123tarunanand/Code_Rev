@@ -11,6 +11,7 @@ var post = require('./controllers/postnew')
 var postpage = require('./controllers/postid')
 var comment = require('./controllers/comment-controller')
 var vote = require('./controllers/vote-controller')
+var categ = require('./controllers/categories')
 
 app.use(bodyParser.urlencoded({extended:true}));
 app.use(bodyParser.json());
@@ -78,6 +79,9 @@ app.get('/posts/new',function(req,res){
 
 app.get('/posts/u/:user',postpage.userpage)
 app.get('/posts/p/:postid',postpage.postcreate)
+app.get('/posts/p/:postid',postpage.postcreate);
+app.get('/c/:cname',categ.homepage);
+app.get('/search/',categ.search)
 
 app.post('/controllers/register-controller', registerController.register);
 app.post('/controllers/authenticate-controller', authenticateController.authenticate);

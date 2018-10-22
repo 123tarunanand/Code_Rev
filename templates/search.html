@@ -1,0 +1,22 @@
+<html>
+<body>
+<form method ="GET" action ='/search'>
+<input type="text" placeholder="Search for categories" name="search"><input type="submit" value="Search">
+</form>
+<br>
+Search results for  <b> <%= search %> </b>
+<br>
+</body>
+</html>
+
+<script>
+var k = <%- JSON.stringify(data) %>;
+for (obj in k)
+{var a = document.createElement('a');
+var linkText = document.createTextNode(k[obj].category);
+a.appendChild(linkText);
+a.href = '/c/'+k[obj].category;
+document.body.appendChild(a);
+document.write("<br>");
+}
+</script>
