@@ -9,11 +9,13 @@ var edprof =  require('./controllers/editprofile')
 var profile = require('./controllers/profile')
 var post = require('./controllers/postnew')
 var postpage = require('./controllers/postid')
-
+var comment = require('./controllers/comment-controller')
+var vote = require('./controllers/vote-controller')
 
 app.use(bodyParser.urlencoded({extended:true}));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+
 app.engine('html', require('ejs').renderFile);
 app.use(session({
   cookieName: 'session',
@@ -75,12 +77,15 @@ app.get('/posts/new',function(req,res){
 
 
 app.get('/posts/u/:user',postpage.userpage)
-app.get('/posts/p/:postid',postpage.postcreate);
+app.get('/posts/p/:postid',postpage.postcreate)
 
 app.post('/controllers/register-controller', registerController.register);
 app.post('/controllers/authenticate-controller', authenticateController.authenticate);
 app.post('/controllers/editprofile',edprof.edit)
 app.post('/controllers/postnew',post.newpost)
+app.post('/controllers/comment-controller',comment.newcomment)
+app.post('/controllers/vote-controller', vote.newvote)
+
 app.listen(8011);
 app.use(function (req, res) {
     res.render( __dirname + "/templates/" + "error.html")

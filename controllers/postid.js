@@ -13,31 +13,60 @@ module.exports.postcreate = function(req,res){
       {
         return res.render(__dirname+"./../templates/error.html");
       }
-      var data = {'title':results[0].title,
-    'content':results[0].content,
-  'username':results[0].username,
-'votes':results[0].votes,
-'time':results[0].time,
-'comments':results[0].comments}
-  connection.query('SELECT * from belongstocategory WHERE postid =?',[req.params.postid],function(error,results,fields){
-    if(error)
-    {
-      console.log(error)
-    }
-    else {
-      var cats =[]
-      for(obj in results)
+      var data = 
       {
-        cats.push(results[obj].cname)
+        'title':results[0].title,
+        'content':results[0].content,
+        'username':results[0].username,
+        'votes':results[0].votes,
+        'time':results[0].time,
+        'comments':results[0].comments,
+        'postid':results[0].postid
       }
-        res.render(__dirname+"/./../templates/"+"postsite.html",{data:data,cats:cats});
+      
+      connection.query('SELECT * from belongstocategory WHERE postid =?',[req.params.postid[0]],function(error,results,fields)
+      {
+        if(error)
+        {
+          console.log(error)
+        }
+        else {
+          var cats =[]
+          for(obj in results)
+          {
+            cats.push(results[obj].cname)
+          }
+          connection.query('SELECT * FROM comment WHERE postid =?',[req.params.postid],function(error,results,fields)
+          {
+            if(error)
+            {
+              console.log("ERROR")
+            }
+            else 
+            {
+              if(results.length == 0)
+                console.log("hello")
+              else {
+                var comment_list = []
+                var i;
+                for(i=0; i < results.length; i++)
+                {
+                  var comment = 
+                  {
+                    'content':results[i].content,
+                    'username':results[i].content,
+                    'time':results[i].time
+                  }
+                  comment_list.push(comment)
+                }
+                res.render(__dirname+"/./../templates/"+"postsite.html",{data:data,cats:cats,comments:comment_list});
+              }
+            }
+          });
+        }
+      });
     }
   });
-
-    }
-  })
-
-
 }
 
 
@@ -48,7 +77,7 @@ module.exports.userpage = function(req,res){
       console.log(error)
     }
     else {
-      if(results.length ==0)
+      if(results.length == 0)
       {
         res.render(__dirname+"./../templates/error.html");
       }

@@ -1,18 +1,50 @@
-<html>
-<h1> Posts by <%= username %> </h1>
-<a id ="body">
-
-</a>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/style/main.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="/home">CodeRev</a>
+    </div>
+    <ul class="nav navbar-nav">
+      <li><a href="/profile">Profile</a></li>
+      <li><a href="/posts/u/<%= username %>">My Posts</a></li>
+      <li><a href="/logout">Logout</a></li>
+    </ul>
+  </div>
+</nav>
+<div class="container">
+  <div class="row">
+    <div class="col-lg-8 col-md-10 mx-auto" id="post-wrapper">
+    </div>
+  </div>
+</div>
+</body>
 </html>
 
 <script>
-var k = <%- JSON.stringify(data) %>;
-for (obj in k)
-{var a = document.createElement('a');
-var linkText = document.createTextNode(k[obj].title);
-a.appendChild(linkText);
-a.href = '/posts/p/'+k[obj].id;
-document.body.appendChild(a);
-document.write("<br>");
-}
+  var k = <%- JSON.stringify(data) %>;
+  for (obj in k)
+  {
+    var a = document.createElement('a');
+    var linkText = document.createTextNode(k[obj].title);
+    var postContainer = document.createElement('div');
+    postContainer.setAttribute("class", "post-preview")
+    var title = document.createElement('h3');
+    title.setAttribute("class","post-title");
+    title.appendChild(linkText)
+    a.appendChild(title);
+    postContainer.appendChild(a);
+    a.href = '/posts/p/'+k[obj].id;
+    var element = document.getElementById("post-wrapper");
+    element.appendChild(a);
+  }
 </script>

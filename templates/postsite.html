@@ -1,20 +1,84 @@
-<a href ='/home'>Home <a> <a href ='/profile'>Profile</a> <a href ='/logout'>Logout</a>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
 
-<html>
+<body>
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="/home">CodeRev</a>
+    </div>
+    <ul class="nav navbar-nav">
+      <li><a href="/profile">Profile</a></li>
+      <li><a href="/logout">Logout</a></li>
+    </ul>
+  </div>
+</nav>
 <h1> <%= data.title %> </h1>
 <br>
 <br>
 Categories : <%= cats %>
 <br>
-<body>
+<br>
+PostID = <%= data.postid %>
+<br>
 <%= data.content %>
 <br>
 <br>
 Posted by :<%= data.username %> on <%= data.time %>
 <br>
+<button id="update-vote"">Upvote</button>
+<p id="error-console"></p>
 <br>
-Votes: <%= data.votes %> Comments:  <%= data.comments %>
-
-</body>
-
+Votes: <p id="vote-count"><%= data.votes %></p> Comments:  <%= data.comments %>
+<br>
+<br>
+<form action="/controllers/comment-controller" method="POST">
+    <label for="cont">Add a comment:</label>
+     <textarea rows="10" cols = "80" name ="cont" style="resize:none;"></textarea>
+    <input type="hidden" name="postid" id="postid" value=<%= data.postid %>>
+    <input type="submit" value="Comment">
+</form>
+<br>
+<br>
+<% for(var i=0; i < comments.length; i++) { %>
+    <br>
+    <%= comments[i].content %>
+    <br>
+ <% } %>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script>
+$("#update-vote").click(function(e) {
+  var formData = {
+        "postid": $("#postid").val()
+    }
+    $.ajax({
+        type: "POST",
+        dataType: "json",
+        url: "/controllers/vote-controller",
+        data: JSON.stringify(formData),
+        contentType: "application/json",
+        success: function(data) {
+          console.log('success');
+          if(data.vote == "increment") {
+            $("#error-console").html("Upvoted!")
+            $("#vote-count").html(data.count)
+          }
+          else {
+            $("#error-console").html("Cannot upvote more than once")
+          }
+          setTimeout(function() {   //calls click event after a certain time
+            $("#error-console").html(""); 
+          }, 1000);
+        }
+    });
+});
+</script> 
+<body>
 </html>
