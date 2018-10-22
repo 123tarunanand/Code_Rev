@@ -29,3 +29,9 @@
   text-decoration: none;
   color: #212529;
 }
+
+.profile-content {
+  font-size: 18px;
+  margin: 1rem;
+  color: black;
+}
