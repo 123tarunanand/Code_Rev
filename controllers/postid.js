@@ -80,7 +80,9 @@ module.exports.userpage = function(req,res){
       if(results.length == 0)
       {
         var data = []
-      res.render(__dirname+'./../templates/allposts.html',{user:req.params.user,username:req.params.user,data:data})
+        connection.query('SELECT reputation from user_profile WHERE username = ?',[req.params.user],function(error,results,fields){
+          res.render(__dirname+'./../templates/allposts.html',{user:req.params.user,data:data,username:req.session.user,rep:results[0].reputation})
+        })
       }
       else {
         var data = []
