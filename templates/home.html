@@ -32,8 +32,15 @@
     <a class="btn navbar-btn navbar-right btn-primary" href="/posts/new">Create Post</a>
   </div>
 </nav>
-<a href ='/posts/new'>New Post </a>
-Welcome <%= username%>
+Welcome <%= username %>
 </body>
+<br>
+New posts:
+<br>
+<% for(var i=0; i < posts.length; i++) { %>
+    <a href = '/posts/p/<%= posts[i].postid %>'><%= posts[i].title %><br></a>
+    <%=  posts[i].time %><br>
+    <%=  posts[i].username %><br><br><br>
+ <% } %>
 
 </html>

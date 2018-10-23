@@ -61,7 +61,24 @@ app.get('/profile/edit',function(req,res){
   {
     return res.redirect('/')
   }
-  res.render(__dirname+"/templates/"+"edit.html",{username:req.session.user,message:req.query.message});
+
+  connection.query('SELECT * from user_profile WHERE username =?',[req.session.user],function(error,results,fields)
+{
+  if(error)
+  {
+    console.log(error)
+  }
+  else {
+    if(results.length==0)
+    {
+      res.render(__dirname+"/templates/"+"edit.html",{username:req.session.user,message:req.query.message,fname:'',lname:'',email:'',desc:''});
+    }
+    else {
+      console.log(results[0].description)
+      res.render(__dirname+"/templates/"+"edit.html",{username:req.session.user,message:req.query.message,fname:results[0].fname,lname:results[0].lname,email:results[0].email_id,desc:results[0].description});
+    }
+  }
+});
 })
 
 app.get('/posts/new',function(req,res){
