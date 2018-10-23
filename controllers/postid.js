@@ -13,7 +13,7 @@ module.exports.postcreate = function(req,res){
       {
         return res.render(__dirname+"./../templates/error.html");
       }
-      var data = 
+      var data =
       {
         'title':results[0].title,
         'content':results[0].content,
@@ -23,8 +23,8 @@ module.exports.postcreate = function(req,res){
         'comments':results[0].comments,
         'postid':results[0].postid
       }
-      
-      connection.query('SELECT * from belongstocategory WHERE postid =?',[req.params.postid[0]],function(error,results,fields)
+
+      connection.query('SELECT * from belongstocategory WHERE postid =?',[req.params.postid],function(error,results,fields)
       {
         if(error)
         {
@@ -42,16 +42,15 @@ module.exports.postcreate = function(req,res){
             {
               console.log("ERROR")
             }
-            else 
+            else
             {
-              if(results.length == 0)
-                console.log("hello")
-              else {
-                var comment_list = []
+              var comment_list = []
+              if(results.length != 0)
+               {
                 var i;
                 for(i=0; i < results.length; i++)
                 {
-                  var comment = 
+                  var comment =
                   {
                     'content':results[i].content,
                     'username':results[i].content,
@@ -59,9 +58,10 @@ module.exports.postcreate = function(req,res){
                   }
                   comment_list.push(comment)
                 }
+              }
                 res.render(__dirname+"/./../templates/"+"postsite.html",{data:data,cats:cats,comments:comment_list});
               }
-            }
+
           });
         }
       });
@@ -79,7 +79,8 @@ module.exports.userpage = function(req,res){
     else {
       if(results.length == 0)
       {
-        res.render(__dirname+"./../templates/error.html");
+        var data = []
+      res.render(__dirname+'./../templates/allposts.html',{user:req.params.user,username:req.params.user,data:data})
       }
       else {
         var data = []
@@ -87,7 +88,10 @@ module.exports.userpage = function(req,res){
         {
            data.push({'title':results[obj].title,'id':results[obj].postid})
         }
-        res.render(__dirname+'./../templates/allposts.html',{username:req.params.user,data:data})
+        connection.query('SELECT reputation from user_profile WHERE username = ?',[req.params.user],function(error,results,fields){
+          res.render(__dirname+'./../templates/allposts.html',{user:req.params.user,data:data,username:req.session.user,rep:results[0].reputation})
+        })
+
       }
     }
   });

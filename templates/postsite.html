@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<title>  <%= data.title %> </title>
 <html lang="en">
 <head>
   <meta charset="utf-8">
@@ -33,7 +34,11 @@
 <h1> <%= data.title %> </h1>
 <br>
 <br>
-Categories : <%= cats %>
+Categories :
+<br>
+<% for(var i=0; i < cats.length; i++) { %>
+    <a href = '/c/<%= cats[i] %>'><%= cats[i] %> </a>
+ <% } %>
 <br>
 <br>
 PostID = <%= data.postid %>
@@ -41,22 +46,23 @@ PostID = <%= data.postid %>
 <%= data.content %>
 <br>
 <br>
-Posted by :<%= data.username %> on <%= data.time %>
+Posted by :<a href = '/posts/u/<%= data.username %>'><%= data.username %></a> on <%= data.time %>
 <br>
-<button id="update-vote"">Upvote</button>
+<button id="update-vote">Upvote</button>
 <p id="error-console"></p>
 <br>
 Votes: <p id="vote-count"><%= data.votes %></p> Comments:  <%= data.comments %>
 <br>
 <br>
 <form action="/controllers/comment-controller" method="POST">
-    <label for="cont">Add a comment:</label>
-     <textarea rows="10" cols = "80" name ="cont" style="resize:none;"></textarea>
-    <input type="hidden" name="postid" id="postid" value=<%= data.postid %>>
+    <label for="cont">Add a comment:</label><br>
+     <textarea rows="5" cols = "50" name ="cont" style="resize:none;"></textarea>
+    <input type="hidden" name="postid" id="postid" value=<%= data.postid %>><br>
     <input type="submit" value="Comment">
 </form>
 <br>
 <br>
+<b> Comments :</b><br>
 <% for(var i=0; i < comments.length; i++) { %>
     <br>
     <%= comments[i].content %>
@@ -84,11 +90,11 @@ $("#update-vote").click(function(e) {
             $("#error-console").html("Cannot upvote more than once")
           }
           setTimeout(function() {   //calls click event after a certain time
-            $("#error-console").html(""); 
+            $("#error-console").html("");
           }, 1000);
         }
     });
 });
-</script> 
+</script>
 <body>
 </html>

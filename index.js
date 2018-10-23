@@ -80,7 +80,6 @@ app.get('/posts/new',function(req,res){
 
 app.get('/posts/u/:user',postpage.userpage)
 app.get('/posts/p/:postid',postpage.postcreate)
-app.get('/posts/p/:postid',postpage.postcreate);
 app.get('/c/:cname',categ.homepage);
 app.get('/search/',categ.search)
 

@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<title> Profile </title>
 <html lang="en">
 <head>
   <meta charset="utf-8">
@@ -15,7 +16,7 @@
       <a class="navbar-brand" href="/home">CodeRev</a>
     </div>
     <ul class="nav navbar-nav">
-      <li><a href="/profile">Profile</a></li>
+      <li><a href="/profile/edit">Edit Profile</a></li>
       <li><a href="/posts/u/<%= username %>">My Posts</a></li>
       <li><a href="/logout">Logout</a></li>
     </ul>
@@ -42,6 +43,10 @@
       <p class="profile-content">Posts: <%=  posts %> </p>
       <p class="profile-content">Comments: <%=  comms %> </p>
       <p class="profile-content">Description: <%= desc %> </p>
+      <p class="profile-content">Subscribed to :
+      <% for(var i=0; i < subscribed.length; i++) { %>
+          <a href = '/c/<%= subscribed[i] %>'><%= subscribed[i] %> </a>
+       <% } %></p>
     </div>
   </div>
 </div>
