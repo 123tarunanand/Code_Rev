@@ -1,8 +1,8 @@
 var mysql      = require('mysql');
 var connection = mysql.createConnection({
-  host     : 'localhost',
-  user     : 'root',  /*  Enter username here*/
-  password : 'tr0ll1ng1n', /*Enter password here */
+  host     : '10.100.12.43',
+  user     : '16co153',  /*  Enter username here*/
+  password : '16189742', /*Enter password here */
   database : 'CODEREV',
   multipleStatements : 'true'
 });
