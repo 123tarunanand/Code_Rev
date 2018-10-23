@@ -12,6 +12,7 @@ var postpage = require('./controllers/postid')
 var comment = require('./controllers/comment-controller')
 var vote = require('./controllers/vote-controller')
 var categ = require('./controllers/categories')
+var home = require('./controllers/home')
 
 app.use(bodyParser.urlencoded({extended:true}));
 app.use(bodyParser.json());
@@ -51,13 +52,7 @@ app.get('/', function (req, res) {
    res.render( __dirname + "/templates/" + "login.html" ,{message:req.query.message});
 })
 
-app.get('/home',function(req,res){
-  if(!req.session.user)
-  {
-    return res.redirect('/')
-  }
-  res.render(__dirname+"/templates/"+"home.html",{username:req.session.user});
-})
+app.get('/home',home.feed);
 
 app.get('/profile',profile.profileload);
 
