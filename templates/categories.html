@@ -2,9 +2,11 @@
 <title> <%= cname %> </title>
 <h1>Category :<%= cname %> </h1>
 
-<a id ="body">
+<p id="error-console"></p>
 
+<a id ="body">
 </a>
+<button id="subscribe-category"">Subscribe</button>
 </html>
 <h1> Posts :</h2><br>
 <script>
@@ -17,4 +19,31 @@ a.href = '/posts/p/'+k[obj].id;
 document.body.appendChild(a);
 document.write("<br>");
 }
+</script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script>
+$("#update-vote").click(function(e) {
+  var formData = {
+        "category": <%- cname %>
+    }
+    $.ajax({
+        type: "POST",
+        dataType: "json",
+        url: "/controllers/subscribe-controller",
+        data: JSON.stringify(formData),
+        contentType: "application/json",
+        success: function(data) {
+          console.log('success');
+          if(data.subscribe == "done") {
+            $("#error-console").html("Subscribed!")
+          }
+          else {
+            $("#error-console").html("Cannot subscribe more than once")
+          }
+          setTimeout(function() {   //calls click event after a certain time
+            $("#error-console").html("");
+          }, 1000);
+        }
+    });
+});
 </script>

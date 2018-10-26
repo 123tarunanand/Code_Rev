@@ -12,6 +12,7 @@ var postpage = require('./controllers/postid')
 var comment = require('./controllers/comment-controller')
 var vote = require('./controllers/vote-controller')
 var categ = require('./controllers/categories')
+var subscribe = require('./controllers/subscribe-controller')
 var home = require('./controllers/home')
 var favicon = require('serve-favicon');
 
@@ -104,6 +105,7 @@ app.post('/controllers/editprofile',edprof.edit)
 app.post('/controllers/postnew',post.newpost)
 app.post('/controllers/comment-controller',comment.newcomment)
 app.post('/controllers/vote-controller', vote.newvote)
+app.post('/controllers/subscribe-controller', subscribe.newsubscribe)
 
 app.listen(8011);
 app.use(function (req, res) {
