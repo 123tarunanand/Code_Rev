@@ -13,11 +13,14 @@ var comment = require('./controllers/comment-controller')
 var vote = require('./controllers/vote-controller')
 var categ = require('./controllers/categories')
 var home = require('./controllers/home')
+var favicon = require('serve-favicon');
+
 
 app.use(bodyParser.urlencoded({extended:true}));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(__dirname + '/static'));
+app.use(favicon(__dirname +'/img/cr.ico'));
 
 app.engine('html', require('ejs').renderFile);
 app.use(session({
