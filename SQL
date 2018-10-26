@@ -17,4 +17,4 @@ CREATE TABLE postvotes(username varchar(20) NOT NULL,postid int(32) NOT NULL UNI
 
 CREATE TABLE belongstocategory(cname varchar(20) NOT NULL, postid int(32) NOT NULL, FOREIGN KEY (cname) REFERENCES categories(name) ON DELETE CASCADE, FOREIGN KEY (postid) REFERENCES post(postid) ON DELETE CASCADE);
 
-CREATE TABLE subscribed(username varchar(20),cname varchar(100),FOREIGN KEY (username) REFERENCES user(username), FOREIGN KEY (cname) REFERENCES categories(name));
+CREATE TABLE subscribed(username varchar(20),cname varchar(100),FOREIGN KEY (username) REFERENCES user(username), FOREIGN KEY (cname) REFERENCES categories(name),constraint pk PRIMARY KEY(cname,username));

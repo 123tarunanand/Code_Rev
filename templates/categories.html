@@ -6,7 +6,8 @@
 
 <a id ="body">
 </a>
-<button id="subscribe-category"">Subscribe</button>
+<button id="subscribe-category">Subscribe</button>
+<button id="unsubscribe-category">Un-Subscribe</button>
 </html>
 <h1> Posts :</h2><br>
 <script>
@@ -22,15 +23,16 @@ document.write("<br>");
 </script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script>
-$("#update-vote").click(function(e) {
-  var formData = {
-        "category": <%- cname %>
+var cn = "<%- cname %>";
+$("#subscribe-category").click(function(e) {
+  var subformData = {
+        "category": cn
     }
     $.ajax({
         type: "POST",
         dataType: "json",
         url: "/controllers/subscribe-controller",
-        data: JSON.stringify(formData),
+        data: JSON.stringify(subformData),
         contentType: "application/json",
         success: function(data) {
           console.log('success');
@@ -45,5 +47,32 @@ $("#update-vote").click(function(e) {
           }, 1000);
         }
     });
+});
+</script>
+<script>
+var cnun = "<%- cname %>";
+$("#unsubscribe-category").click(function(f) {
+  var unsubformData = {
+        "category": cnun
+    }
+    $.ajax({
+        type: "POST",
+        dataType: "json",
+        url: "/unsubscribe",
+        data: JSON.stringify(unsubformData),
+        contentType: "application/json",
+        success: function(data) {
+          console.log('success');
+          if(data.unsubscribe == "done") {
+            $("#error-console").html("Un-Subscribed!")
+          }
+          else {
+            $("#error-console").html("Cannot unsubscribe more than once")
+          }
+          setTimeout(function() {   //calls click event after a certain time
+            $("#error-console").html("");
+          }, 1000);
+        }
+    })
 });
 </script>

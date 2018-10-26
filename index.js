@@ -106,6 +106,7 @@ app.post('/controllers/postnew',post.newpost)
 app.post('/controllers/comment-controller',comment.newcomment)
 app.post('/controllers/vote-controller', vote.newvote)
 app.post('/controllers/subscribe-controller', subscribe.newsubscribe)
+app.post('/unsubscribe', subscribe.newunsubscribe)
 
 app.listen(8011);
 app.use(function (req, res) {
