@@ -44,13 +44,19 @@
 
 function empty() {
     var x,y;
+    var letterNumber = /^[0-9a-zA-Z]+$/;
     x = document.getElementById("user").value;
-    x = x.trim()
-    y = document.getElementById("pwd").value;
     if (x == "") {
         $("#error-console").html("Username cannot be blank")
         return false;
     };
+    if(!x.match(letterNumber))
+    {
+      $("#error-console").html("Username can consist of only letters and numbers")
+      return false;
+    }
+    y = document.getElementById("pwd").value;
+
     if(y == ""){
       $("#error-console").html("Password cannot be blank")
       return false;

@@ -36,24 +36,52 @@
     <h2>Edit Profile Details</h2>
     <form action="/controllers/editprofile" method="POST">
       <div class="form-group">
-        <label for="email">First Name:*</label>
-        <input type="text" class="form-control" id="fname" placeholder="Enter first name" name="fname" value = <%= fname %> >
+        <label for="email">First Name(Optional):</label>
+        <input type="text" class="form-control" id="fname" placeholder="Enter first name" name="fname" id = "fname" value = <%= fname %> >
       </div>
       <div class="form-group">
-        <label for="pwd">Last Name:*</label>
-        <input type="text" class="form-control" id="lname" placeholder="Enter last name" name="lname" value = <%= lname %>>
+        <label for="pwd">Last Name(Optional):</label>
+        <input type="text" class="form-control" id="lname" placeholder="Enter last name" name="lname" id = "lname" value = <%= lname %>>
       </div>
       <div class="form-group">
-          <label for="pwd">E-mail Address:*</label>
+          <label for="pwd">E-mail Address(Optional):</label>
           <input type="email" class="form-control" id="email" placeholder="Enter e-mail address" name="email" value = <%= email %>>
       </div>
       <div class="form-group">
-        <label for="text">Description:*</label>
+        <label for="text">Description(Optional):</label>
         <textarea rows=10 cols=10 class="form-control" id="desc" placeholder="Enter description" name="desc"  ><%= desc %></textarea>
       </div>
-      <button type="submit" class="btn btn-default">Submit</button>
+      <button type="submit" class="btn btn-default" onClick="return empty()">Submit</button>
     </form>
   </div>
 </body>
-<h1><%= message %> </h1>
+<div id="error-console">
+<%= message %></div>
 </html>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script>
+
+function empty() {
+    var x,y;
+    var letterNumber = /^[a-zA-Z]+$/;
+    x = document.getElementById("fname").value;
+    y = document.getElementById("lname").value;
+    if (!(x==""))
+    {
+      if(!x.match(letterNumber))
+      {
+        $("#error-console").html("First name can consist of only letters")
+        return false;
+      }
+    }
+    if (!(y==""))
+    {
+      if(!y.match(letterNumber))
+      {
+        $("#error-console").html("Last name can consist of only letters")
+        return false;
+      }
+    }
+}
+</script>

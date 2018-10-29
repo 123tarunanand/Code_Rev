@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-<title>  <%= data.title %> </title>
 <html lang="en">
 <head>
   <meta charset="utf-8">
@@ -11,7 +10,6 @@
   <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.13.1/highlight.min.js"></script>
   <script>hljs.initHighlightingOnLoad();</script>
 </head>
-
 <body>
 <nav class="navbar navbar-default">
   <div class="container-fluid">
@@ -35,6 +33,7 @@
     <a class="btn navbar-btn navbar-right btn-primary" href="/posts/new">Create Post</a>
   </div>
 </nav>
+<title>  <%= data.title %> </title>
 <div class="container">
 <h1> <%= data.title %> </h1>
 <br>
@@ -60,7 +59,7 @@ Language: <%= data.language %>
 <p id="error-console"></p>
 <br>
 Votes: <%= data.votes %>
-<br> 
+<br>
 Comments:  <%= data.comments %>
 <br>
 <br>

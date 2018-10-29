@@ -1,5 +1,4 @@
-1. AJAX for subscribed
-2. Home feed
-3. javascript to make sure non empty fields
-4. Frontend
-5. syntax highlighting
+1. Register -only valid characters
+2. username- only valid characters
+3. Categories
+4. No static loading
