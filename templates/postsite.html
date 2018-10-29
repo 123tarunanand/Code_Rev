@@ -56,6 +56,7 @@ Comments:  <%= data.comments %>
 </div>
 <div class="container">
 <form action="/controllers/comment-controller" method="POST">
+  <input type="hidden" name="_csrf" id="_csrf" value="<%= csrftoken %>">
     <label for="cont">Add a comment:</label><br>
      <textarea rows="5" cols = "50" name ="cont" style="resize:none;"></textarea>
     <input type="hidden" name="postid" id="postid" value=<%= data.postid %>><br>
@@ -78,7 +79,8 @@ Comments:
 <script>
 $("#update-vote").click(function(e) {
   var formData = {
-        "postid": $("#postid").val()
+        "postid": $("#postid").val(),
+        "_csrf" : $('#_csrf').val()
     }
     $.ajax({
         type: "POST",
