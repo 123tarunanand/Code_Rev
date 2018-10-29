@@ -5,7 +5,7 @@ USE CODEREV;
 
 CREATE TABLE user(username varchar(20) UNIQUE NOT NULL PRIMARY KEY, password varchar(100) NOT NULL,dojoin date NOT NULL);
 
-CREATE TABLE user_profile(email_id varchar(20) ,fname varchar(20), lname varchar(20), reputation int(6) NOT NULL DEFAULT 0, description varchar(1000), posts int(4) NOT NULL DEFAULT 0, comments int(4) NOT NULL DEFAULT 0, username varchar(20) UNIQUE NOT NULL PRIMARY KEY, FOREIGN KEY (username) REFERENCES user(username) ON DELETE CASCADE);
+CREATE TABLE user_profile(email_id varchar(50) ,fname varchar(20), lname varchar(20), reputation int(6) NOT NULL DEFAULT 0, description varchar(1000), posts int(4) NOT NULL DEFAULT 0, comments int(4) NOT NULL DEFAULT 0, username varchar(20) UNIQUE NOT NULL PRIMARY KEY, FOREIGN KEY (username) REFERENCES user(username) ON DELETE CASCADE);
 
 CREATE TABLE post(language varchar(20) NOT NULL, votes int(4)  NOT NULL DEFAULT 0, comments int(4) NOT  NULL DEFAULT 0, title varchar(100) NOT NULL, content varchar(1000)NOT NULL, time datetime NOT NULL , postid int(32) UNIQUE NOT NULL, username varchar(20) NOT NULL,PRIMARY KEY(postid),CONSTRAINT postername FOREIGN KEY(username) REFERENCES user(username) ON DELETE CASCADE);
 
