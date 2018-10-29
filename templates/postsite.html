@@ -46,7 +46,7 @@
 <div class="container">
 <button id="update-vote"><i class="glyphicon glyphicon-triangle-top"></i></button>
 <p id="error-console"></p>
-Categories: 
+Categories:
 <% for(var i=0; i < cats.length; i++) { %>
     <a href = '/c/<%= cats[i] %>'><%= cats[i] %> </a>
  <% } %>
@@ -58,10 +58,13 @@ Comments:  <%= data.comments %>
 <form action="/controllers/comment-controller" method="POST">
   <input type="hidden" name="_csrf" id="_csrf" value="<%= csrftoken %>">
     <label for="cont">Add a comment:</label><br>
-     <textarea rows="5" cols = "50" name ="cont" style="resize:none;"></textarea>
+     <textarea rows="5" cols = "50" id="content" name ="cont" style="resize:none;"></textarea>
     <input type="hidden" name="postid" id="postid" value=<%= data.postid %>><br>
-    <input type="submit" value="Comment">
+    <input type="submit" value="Comment"  onClick="return empty()">
+    <div id="error-console">
+    </div>
 </form>
+
 Comments:
 <% for(var i=0; i < comments.length; i++) { %>
   <div class="comment-view">
@@ -74,7 +77,18 @@ Comments:
   </div>
 <% } %>
 </div>
+<script>
 
+function empty() {
+    var x;
+    x = document.getElementById("content").value;
+    x = x.trim()
+    if (x == "") {
+        $("#error-console").html("Comment cannot be blank")
+        return false;
+    };
+}
+</script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script>
 $("#update-vote").click(function(e) {

@@ -80,10 +80,25 @@ module.exports.userpage = function(req,res){
     else {
       if(results.length == 0)
       {
-        var data = []
-        connection.query('SELECT reputation from user_profile WHERE username = ?',[req.params.user],function(error,results,fields){
-          res.render(__dirname+'./../templates/allposts.html',{user:req.params.user,data:data,username:req.session.user,rep:results[0].reputation})
-        })
+        connection.query('SELECT * from user where username =?',[req.params.user],function(error,results,fields){
+          if(error)
+          {
+            console.log(error)
+          }
+          else {
+            if(results.length == 0)
+            {
+                return res.render(__dirname+"./../templates/error.html");
+            }
+            else {
+              var data = []
+              connection.query('SELECT reputation from user_profile WHERE username = ?',[req.params.user],function(error,results,fields){
+                res.render(__dirname+'./../templates/allposts.html',{user:req.params.user,data:data,username:req.session.user,rep:results[0].reputation})
+              })
+            }
+          }
+        });
+
       }
       else {
         var data = []
