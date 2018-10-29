@@ -29,6 +29,7 @@
 
 #error-console {
   float: right;
+  color: red;
 }
 /*!
  * Start Bootstrap - Clean Blog v5.0.1 (https://startbootstrap.com/template-overviews/clean-blog)
@@ -236,6 +237,7 @@ body{margin-top:20px;}
 .comment-view {
     margin: 10pt;
 }
+
 .profile-info-value>span+span:before {
     display: inline;
     content: ",";
