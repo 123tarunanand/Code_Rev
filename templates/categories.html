@@ -58,7 +58,8 @@ document.write("<br>");
 var cn = "<%- cname %>";
 $("#subscribe-category").click(function(e) {
   var subformData = {
-        "category": cn
+        "category": cn,
+        "_csrf":"<%- csrftoken %>"
     }
     $.ajax({
         type: "POST",
