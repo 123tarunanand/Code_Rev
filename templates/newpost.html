@@ -10,20 +10,53 @@
 </head>
 <body>
 <form action="/controllers/postnew" method="POST">
-Title :  <input type = "text" name ="title">
+Title :  <input type = "text" name ="title" id="title">
 <br>
 <br>
 <label for="cont">Content:</label>
 <br>
- <textarea rows="10" cols = "80" name ="cont" style="resize:none;"></textarea>
+ <textarea rows="10" cols = "80" name ="cont" style="resize:none;" id="cont"></textarea>
 <br>
 <br>
-Categories :  <input type = "text" name ="categ">
+Categories :  <input type = "text" name ="categ" id="categ">
 <br>
 <br>
-Language : <input type = "text" name="language">
-<input type="submit" value="Post">
+Language : <input type = "text" name="language" id ="lang">
+<input type="submit" value="Post" onClick="return empty()">
 </form>
 </body>
-<h1><%= message %> </h1>
+<div id="error-console">
+<%= message %></div>
 </html>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script>
+
+function empty() {
+    var x,y,z,a;
+    x = document.getElementById("title").value;
+    y = document.getElementById("cont").value;
+    z = document.getElementById("categ").value;
+    a = document.getElementById("lang").value;
+    x = x.trim()
+    y = y.trim()
+    z = z.trim()
+    a = a.trim()
+    if (x == "") {
+        $("#error-console").html("Title cannot be blank")
+        return false;
+    };
+    if(y == ""){
+      $("#error-console").html("Content cannot be blank")
+      return false;
+    }
+    if(z == ""){
+      $("#error-console").html("Categories cannot be blank")
+      return false;
+    }
+    if(a == ""){
+      $("#error-console").html("Languages cannot be blank")
+      return false;
+    }
+}
+</script>
