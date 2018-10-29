@@ -64,6 +64,7 @@ Comments:  <%= data.comments %>
 <br>
 <br>
 <form action="/controllers/comment-controller" method="POST">
+  <input type="hidden" name="_csrf" value="<%= csrftoken %>">
     <label for="cont">Add a comment:</label><br>
      <textarea rows="5" cols = "50" name ="cont" style="resize:none;"></textarea>
     <input type="hidden" name="postid" id="postid" value=<%= data.postid %>><br>
@@ -90,6 +91,7 @@ $("#update-vote").click(function(e) {
         url: "/controllers/vote-controller",
         data: JSON.stringify(formData),
         contentType: "application/json",
+        _csrf : $('#_csrf').val(),
         success: function(data) {
           console.log('success');
           if(data.vote == "increment") {

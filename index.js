@@ -15,6 +15,8 @@ var categ = require('./controllers/categories')
 var subscribe = require('./controllers/subscribe-controller')
 var home = require('./controllers/home')
 var favicon = require('serve-favicon');
+var csrf = require('csurf');
+var validator = require('express-validator');
 
 
 app.use(bodyParser.urlencoded({extended:true}));
@@ -26,6 +28,7 @@ app.use(function(req, res, next) {
   res.set('Cache-Control', 'no-cache, private, no-store, must-revalidate, max-stale=0, post-check=0, pre-check=0');
   next();
 });
+app.use(validator());
 app.engine('html', require('ejs').renderFile);
 app.use(session({
   cookieName: 'session',
@@ -36,7 +39,18 @@ app.use(session({
   secure: true,
   ephemeral: true
 }));
-
+app.use(csrf());
+app.use(function (req, res, next) {
+  res.cookie('XSRF-TOKEN', req.csrfToken());
+  res.locals.csrftoken = req.csrfToken();
+  next();
+});
+app.use(function(req, res, next) {
+  for (var item in req.body) {
+    req.sanitize(item).escape();
+  }
+  next();
+});
 
 app.get('/register', function (req, res) {
   if(req.session.user)
