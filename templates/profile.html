@@ -10,7 +10,7 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 <body>
-<nav class="navbar navbar-default">
+<nav class="navbar navbar-expand-lg navbar-light fixed-top">
   <div class="container-fluid">
     <div class="navbar-header">
       <a class="navbar-brand" href="/home">CodeRev</a>
@@ -35,19 +35,67 @@
 </nav>
 <div class="container">
   <div class="row">
-    <div class="col-lg-8 col-md-10 mx-auto" id="profile-wrapper">
-      <p class="profile-content">First Name: <%=  fname %> </p>
-      <p class="profile-content">Last Name:<%=  lname %> </p>
-      <p class="profile-content">Email id: <%=  email %> </p>
-      <p class="profile-content">Date of Joining: <%=  date %> </p>
-      <p class="profile-content">Reputation: <%=  rep %> </p>
-      <p class="profile-content">Posts: <%=  posts %> </p>
-      <p class="profile-content">Comments: <%=  comms %> </p>
-      <p class="profile-content">Description: <%= desc %> </p>
-      <p class="profile-content">Subscribed to :
-      <% for(var i=0; i < subscribed.length; i++) { %>
-          <a href = '/c/<%= subscribed[i] %>'><%= subscribed[i] %> </a>
-       <% } %></p>
+    <div class="">
+        <div class="profile-user-info">
+            <div class="profile-info-row">
+              <div class="profile-info-name"> Name </div>
+        
+              <div class="profile-info-value">
+                <span><%= fname %> <%= lname %> </span>
+              </div>
+            </div>
+        
+            <div class="profile-info-row">
+              <div class="profile-info-name"> Date of Joining </div>
+        
+              <div class="profile-info-value">
+                <span><%=  date %> </span>
+              </div>
+            </div>
+        
+            <div class="profile-info-row">
+              <div class="profile-info-name"> Reputation </div>
+        
+              <div class="profile-info-value">
+                <span><%=  rep %> </span>
+              </div>
+            </div>
+        
+            <div class="profile-info-row">
+                <div class="profile-info-name">Posts </div>
+          
+                <div class="profile-info-value">
+                  <span><%=  posts %> </span>
+                </div>
+              </div>
+        
+              <div class="profile-info-row">
+                  <div class="profile-info-name"> Comments </div>
+            
+                  <div class="profile-info-value">
+                    <span><%=  comms %></span>
+                  </div>
+                </div>
+        
+        
+            <div class="profile-info-row">
+              <div class="profile-info-name"> Description </div>
+        
+              <div class="profile-info-value">
+                <span><%= desc %> </span>
+              </div>
+            </div>
+        
+            <div class="profile-info-row">
+              <div class="profile-info-name"> Subscribed To </div>
+        
+              <div class="profile-info-value">
+                <% for(var i=0; i < subscribed.length; i++) { %>
+                    <a href = '/c/<%= subscribed[i] %>'><%= subscribed[i] %> </a>
+                 <% } %></span>
+              </div>
+            </div>
+          </div>
     </div>
   </div>
 </div>

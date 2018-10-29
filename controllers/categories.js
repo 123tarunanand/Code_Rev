@@ -14,7 +14,7 @@ module.exports.homepage = function(req,res)
         return res.render(__dirname+"./../templates/error.html");
       }
       else {
-        connection.query('SELECT post.postid,title from belongstocategory,post WHERE belongstocategory.postid = post.postid AND cname = ?',[req.params.cname],function(error,results,fields)
+        connection.query('SELECT post.postid,title,post.username,post.time from belongstocategory,post WHERE belongstocategory.postid = post.postid AND cname = ?',[req.params.cname],function(error,results,fields)
         {
           if(error)
           {
@@ -24,7 +24,7 @@ module.exports.homepage = function(req,res)
             var data = []
             for (obj in results)
             {
-               data.push({'title':results[obj].title,'id':results[obj].postid})
+               data.push({'title':results[obj].title,'id':results[obj].postid,'time':results[obj].time,'username':results[obj].username})
             }
             return res.render(__dirname+"./../templates/categories.html",{cname:req.params.cname,data:data});
           }

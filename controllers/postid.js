@@ -54,7 +54,7 @@ module.exports.postcreate = function(req,res){
                   var comment =
                   {
                     'content':results[i].content,
-                    'username':results[i].content,
+                    'username':results[i].username,
                     'time':results[i].time
                   }
                   comment_list.push(comment)

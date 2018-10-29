@@ -7,9 +7,11 @@
   <link rel="stylesheet"  type="text/css" href="/style/main.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+  <title> Posts in "<%= cname %>" </title>
 </head>
 <body>
-<nav class="navbar navbar-default">
+<nav class="navbar navbar-expand-lg navbar-light fixed-top">
   <div class="container-fluid">
     <div class="navbar-header">
       <a class="navbar-brand" href="/home">CodeRev</a>
@@ -31,28 +33,35 @@
     <a class="btn navbar-btn navbar-right btn-primary" href="/posts/new">Create Post</a>
   </div>
 </nav>
-</body>
-<title> <%= cname %> </title>
-<h1>Category :<%= cname %> </h1>
 
-<p id="error-console"></p>
-
-<a id ="body">
-</a>
-<button id="subscribe-category">Subscribe</button>
-</html>
-<h1> Posts :</h2><br>
-<script>
-var k = <%- JSON.stringify(data) %>;
-for (obj in k)
-{var a = document.createElement('a');
-var linkText = document.createTextNode(k[obj].title);
-a.appendChild(linkText);
-a.href = '/posts/p/'+k[obj].id;
-document.body.appendChild(a);
-document.write("<br>");
-}
-</script>
+<header class="masthead">
+  <div class="category-header">
+      <h3 class="category-name"> <%= cname %></h3>
+      <button id="subscribe-category" class="btn btn-primary navbar-right">Subscribe</button>
+      <br>
+      <p id="error-console"></p>
+  </div>
+  </header>
+  <div class="container">
+      <div class="row">
+        <div class="col-lg-10 col-md-12 mx-auto">
+      <% for(var i=0; i < data.length; i++) { %>
+        <div class="post-preview">
+          <a href = '/posts/p/<%= data[i].id %>'>
+            <h2 class="post-title">
+              <%= data[i].title %>
+            </h2>
+          </a>
+            <p class="post-meta">
+              Posted by 
+              <a href="/posts/u/<%= data[i].username %>"><%= data[i].username %></a>
+              on <%=  data[i].time %>
+            </p>
+        </div>
+          <% } %>
+</div>
+</div>
+</div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script>
 var cn = "<%- cname %>";
@@ -81,3 +90,4 @@ $("#subscribe-category").click(function(e) {
     });
 });
 </script>
+</html>
