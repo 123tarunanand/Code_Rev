@@ -33,33 +33,24 @@
     <a class="btn navbar-btn navbar-right btn-primary" href="/posts/new">Create Post</a>
   </div>
 </nav>
-<h2> Reputation : <%= rep %> </h2>
 <div class="container">
-  <div class="row">
-
-    <div class="col-lg-8 col-md-10 mx-auto" id="post-wrapper">
+    <div class="row">
+      <div class="col-lg-8 col-md-10 mx-auto">
+    <% for(var i=0; i < data.length; i++) { %>
+      <div class="post-preview">
+        <a href = '/posts/p/<%= data[i].id %>'>
+          <h2 class="post-title">
+            <%= data[i].title %>
+          </h2>
+        </a>
+          <p class="post-meta">
+            Posted on <%=  data[i].time %>
+          </p>
+      </div>
+        <% } %>
     </div>
-  </div>
-</div>
+    </div>
+    </div>
 </body>
 
 </html>
-
-<script>
-  var k = <%- JSON.stringify(data) %>;
-  for (obj in k)
-  {
-    var a = document.createElement('a');
-    var linkText = document.createTextNode(k[obj].title);
-    var postContainer = document.createElement('div');
-    postContainer.setAttribute("class", "post-preview")
-    var title = document.createElement('h3');
-    title.setAttribute("class","post-title");
-    title.appendChild(linkText)
-    a.appendChild(title);
-    postContainer.appendChild(a);
-    a.href = '/posts/p/'+k[obj].id;
-    var element = document.getElementById("post-wrapper");
-    element.appendChild(postContainer);
-  }
-</script>

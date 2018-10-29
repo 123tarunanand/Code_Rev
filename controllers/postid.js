@@ -21,7 +21,8 @@ module.exports.postcreate = function(req,res){
         'votes':results[0].votes,
         'time':results[0].time,
         'comments':results[0].comments,
-        'postid':results[0].postid
+        'postid':results[0].postid,
+        'language':results[0].language
       }
 
       connection.query('SELECT * from belongstocategory WHERE postid =?',[req.params.postid],function(error,results,fields)
@@ -71,7 +72,7 @@ module.exports.postcreate = function(req,res){
 
 
 module.exports.userpage = function(req,res){
-  connection.query('SELECT title,postid from post where username =?',[req.params.user],function(error,results,fields){
+  connection.query('SELECT title,postid,time from post where username =?',[req.params.user],function(error,results,fields){
     if(error)
     {
       console.log(error)
@@ -88,12 +89,11 @@ module.exports.userpage = function(req,res){
         var data = []
         for (obj in results)
         {
-           data.push({'title':results[obj].title,'id':results[obj].postid})
+           data.push({'title':results[obj].title,'id':results[obj].postid,'time':results[obj].time})
         }
         connection.query('SELECT reputation from user_profile WHERE username = ?',[req.params.user],function(error,results,fields){
           res.render(__dirname+'./../templates/allposts.html',{user:req.params.user,data:data,username:req.session.user,rep:results[0].reputation})
         })
-
       }
     }
   });

@@ -36,7 +36,8 @@ module.exports.newpost=function(req,res){
                 req.body.cont,
                 formatted,
                 results[0].postid + 1,
-                req.session.user]
+                req.session.user,
+                req.body.language]
               ]
               postid = results[0].postid + 1
             }
@@ -46,11 +47,13 @@ module.exports.newpost=function(req,res){
                 req.body.cont,
                 formatted,
                 1,
-                req.session.user]
+                req.session.user,
+                req.body.language]
               ]
               postid = 1
             }
-            connection.query('INSERT INTO post (title,content,time,postid,username) VALUES?',[postdata],function(error,results,fields){
+            console.log(req.body.language)
+            connection.query('INSERT INTO post (title,content,time,postid,username,language) VALUES?',[postdata],function(error,results,fields){
               if(error)
               {
                 return res.redirect('/posts/new/?message=Database query error 3')

@@ -7,7 +7,6 @@
 <a id ="body">
 </a>
 <button id="subscribe-category">Subscribe</button>
-<button id="unsubscribe-category">Un-Subscribe</button>
 </html>
 <h1> Posts :</h2><br>
 <script>
@@ -47,32 +46,5 @@ $("#subscribe-category").click(function(e) {
           }, 1000);
         }
     });
-});
-</script>
-<script>
-var cnun = "<%- cname %>";
-$("#unsubscribe-category").click(function(f) {
-  var unsubformData = {
-        "category": cnun
-    }
-    $.ajax({
-        type: "POST",
-        dataType: "json",
-        url: "/unsubscribe",
-        data: JSON.stringify(unsubformData),
-        contentType: "application/json",
-        success: function(data) {
-          console.log('success');
-          if(data.unsubscribe == "done") {
-            $("#error-console").html("Un-Subscribed!")
-          }
-          else {
-            $("#error-console").html("Cannot unsubscribe more than once")
-          }
-          setTimeout(function() {   //calls click event after a certain time
-            $("#error-console").html("");
-          }, 1000);
-        }
-    })
 });
 </script>

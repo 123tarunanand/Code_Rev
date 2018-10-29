@@ -7,6 +7,9 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.13.1/styles/default.min.css">
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.13.1/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
 </head>
 
 <body>
@@ -32,7 +35,13 @@
     <a class="btn navbar-btn navbar-right btn-primary" href="/posts/new">Create Post</a>
   </div>
 </nav>
+<div class="container">
 <h1> <%= data.title %> </h1>
+<br>
+<br>
+<pre><code class="<%= data.content %>">
+<%= data.content %>
+</code></pre>
 <br>
 <br>
 Categories :
@@ -41,18 +50,18 @@ Categories :
     <a href = '/c/<%= cats[i] %>'><%= cats[i] %> </a>
  <% } %>
 <br>
-<br>
-PostID = <%= data.postid %>
-<br>
-<%= data.content %>
-<br>
-<br>
 Posted by :<a href = '/posts/u/<%= data.username %>'><%= data.username %></a> on <%= data.time %>
+<br>
+<br>
+Language: <%= data.language %>
+<br>
 <br>
 <button id="update-vote">Upvote</button>
 <p id="error-console"></p>
 <br>
-Votes: <p id="vote-count"><%= data.votes %></p> Comments:  <%= data.comments %>
+Votes: <%= data.votes %>
+<br> 
+Comments:  <%= data.comments %>
 <br>
 <br>
 <form action="/controllers/comment-controller" method="POST">
@@ -69,6 +78,7 @@ Votes: <p id="vote-count"><%= data.votes %></p> Comments:  <%= data.comments %>
     <%= comments[i].content %>
     <br>
  <% } %>
+</div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script>
 $("#update-vote").click(function(e) {
