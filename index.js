@@ -78,7 +78,6 @@ app.get('/profile/edit',function(req,res){
       res.render(__dirname+"/templates/"+"edit.html",{username:req.session.user,message:req.query.message,fname:'',lname:'',email:'',desc:''});
     }
     else {
-      console.log(results[0].description)
       res.render(__dirname+"/templates/"+"edit.html",{username:req.session.user,message:req.query.message,fname:results[0].fname,lname:results[0].lname,email:results[0].email_id,desc:results[0].description});
     }
   }
